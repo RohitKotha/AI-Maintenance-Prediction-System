@@ -1,120 +1,73 @@
-AI Predictive Maintenance System
-This project implements an end-to-end system for predicting vehicle component failures using machine learning. It includes a data simulator, a model training pipeline, a REST API to serve predictions, and a responsive web dashboard for user interaction.
+# 🔧 AI Predictive Maintenance System
 
-(Feel free to replace the link above with a direct upload of your screenshot to the repository)
+This project uses **machine learning** to predict vehicle component failures, helping to anticipate and prevent costly breakdowns. It includes a **Python Flask API** backend for prediction and an **HTML/JavaScript** frontend for displaying results.
 
-Features
-Synthetic Data Generation: A Python script (train.py) simulates realistic sensor data (mileage, temperature, vibration, etc.) for thousands of vehicles.
+---
 
-Machine Learning Model: A GradientBoostingClassifier is trained to predict the probability of component failure based on sensor readings.
+## 🚀 How to Run
 
-REST API: A lightweight Flask API (app.py) exposes a /predict endpoint to serve real-time predictions from the trained model.
+### 1. Prerequisites
 
-Interactive Dashboard: A user-friendly, responsive front-end (index.html) built with HTML, Tailwind CSS, and Chart.js allows users to input data and visualize the failure probability on a gauge.
+Ensure you have the following installed:
 
-System Architecture
-The project follows a simple, yet effective, machine learning system design pattern:
+- Python **3.8+**
+- Git
 
-[1. Data Simulation & Training] -> [2. Saved Model (.pkl)] -> [3. Flask API] <-> [4. Web Dashboard]
+---
 
-Data Simulation & Training (train.py):
+### 2. Setup Instructions
 
-Generates a vehicle_data.csv file with synthetic sensor data.
-
-Trains a scikit-learn model on this data.
-
-Saves the trained model as maintenance_model.pkl.
-
-Flask API (app.py):
-
-Loads the maintenance_model.pkl file on startup.
-
-Listens for POST requests with JSON data at the /predict endpoint.
-
-Returns a JSON response containing the failure prediction and probability.
-
-Web Dashboard (index.html):
-
-Provides a form for users to enter vehicle sensor data.
-
-On submission, sends a fetch request to the Flask API.
-
-Parses the API response and dynamically updates the UI with the prediction message and a visual gauge chart.
-
-Getting Started
-Follow these instructions to get a copy of the project up and running on your local machine.
-
-Prerequisites
-Python 3.8+
-
-Git
-
-Installation & Setup
-Clone the repository:
-
+```bash
+# Clone the repository
 git clone https://github.com/your-username/AI-Maintenance-Prediction.git
 cd AI-Maintenance-Prediction
 
-Create a virtual environment (recommended):
-
-# For Windows
-python -m venv venv
-venv\Scripts\activate
-
-# For macOS/Linux
-python3 -m venv venv
-source venv/bin/activate
-
-Install the required Python packages:
-
+# Install dependencies
 pip install -r requirements.txt
+```
 
-Running the System
-The system requires two separate terminal processes to run concurrently: one for the back-end API and one for the front-end.
+---
 
-Terminal 1: Generate Data & Train Model:
-If you haven't already, run the training script. This only needs to be done once.
+### 3. Running the Application
 
+You’ll need **two terminals**:
+
+#### Terminal 1 – Start the Backend (API)
+
+```bash
+# Train and save the ML model (run once)
 python train.py
 
-This will generate vehicle_data.csv and maintenance_model.pkl.
-
-Terminal 1: Start the API Server:
-Launch the Flask API.
-
+# Start the Flask API
 python app.py
+```
 
-The API will now be running at http://127.0.0.1:5000.
+#### Terminal 2 – Start the Frontend
 
-Terminal 2: Launch the Dashboard:
-The simplest way to serve the index.html file is by using Python's built-in HTTP server.
-
+```bash
+# Serve the frontend via HTTP server
 python -m http.server
+```
 
-Now, open your web browser and navigate to http://localhost:8000.
+Then, open your browser and visit:  
+👉 **http://localhost:8000**
 
-You should now see the dashboard and be able to make predictions.
+---
 
-API Endpoint
-URL: /predict
+## 📦 Required Libraries
 
-Method: POST
+The following Python packages are required and are listed in `requirements.txt`:
 
-Data Format: JSON
+- `pandas`  
+- `numpy`  
+- `scikit-learn`  
+- `joblib`  
+- `Flask`  
+- `Flask-Cors`
 
-Example Payload:
+---
 
-{
-  "Mileage": 85000,
-  "Temperature": 95.5,
-  "Vibration": 4.2,
-  "HoursOperated": 2150
-}
+## 📝 Notes
 
-Success Response:
-
-{
-  "prediction": 1,
-  "probability": 0.8872,
-  "message": "Warning: Maintenance recommended within the next 500 miles."
-}
+- This project is ideal for demonstrating predictive analytics in automotive diagnostics.
+- It can be extended to real-time sensor data integration using tools like MQTT or WebSockets.
